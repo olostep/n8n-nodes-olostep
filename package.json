@@ -1,15 +1,15 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "n8n-nodes-olostep",
   "version": "0.1.0",
-  "description": "",
+  "description": "n8n node for Olostep Scrape API",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Olostep Technologies",
+    "email": "info@olostep.com"
   },
   "repository": {
     "type": "git",
@@ -33,12 +33,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/OlostepScrapeApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/OlostepScrape/OlostepScrape.node.js"
     ]
   },
   "devDependencies": {

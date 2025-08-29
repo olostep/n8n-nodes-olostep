@@ -1,0 +1,18 @@
+{
+	"node": "n8n-nodes-base.OlostepScrape",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Development", "Developer Tools"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://www.olostep.com"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.olostep.com"
+			}
+		]
+	}
+}
