@@ -10,12 +10,12 @@ import {
 
 export class OlostepScrape implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Olostep Scrape API',
+		displayName: 'Olostep Web Scraper',
 		name: 'olostepScrape',
 		icon: 'file:olostep.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Scrape a URL using the Olostep API',
+		description: 'Search Google and extract content from web',
 		defaults: {
 			name: 'Olostep Scrape',
 		},
@@ -49,7 +49,6 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Search Google',
 						value: 'search',
-						description: 'Search Google',
 						action: 'Search google',
 					},
 				],
@@ -72,7 +71,6 @@ export class OlostepScrape implements INodeType {
 				},
 				default:'',
 				placeholder: 'https://example.com',
-				description:'The URL to scrape',
 			},
 			{
 				displayName: 'Query',
