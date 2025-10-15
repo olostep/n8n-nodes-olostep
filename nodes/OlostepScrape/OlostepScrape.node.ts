@@ -123,7 +123,10 @@ export class OlostepScrape implements INodeType {
 					const result = responseData as IDataObject;
 					const scrapeResult = result.result as IDataObject | undefined;
 					const markdownContent = scrapeResult?.markdown_content as string | undefined;
-					returnData.push({ markdown: markdownContent ?? null });
+					returnData.push({
+						json: { markdown: markdownContent ?? null },
+						pairedItem: { item: i },
+					});
 				} else if (operation === 'search') {
 					const query = this.getNodeParameter('query', i) as string;
 					const data: IDataObject = {
@@ -161,11 +164,14 @@ export class OlostepScrape implements INodeType {
 						}
 
 						const itemsToReturn = Array.isArray(parsedData) ? parsedData : [parsedData];
-						returnData.push(...itemsToReturn);
+						returnData.push(...itemsToReturn.map(item => ({
+							json: item,
+							pairedItem: { item: i },
+						})));
 					}
 				}
 			}
 		}
-		return [this.helpers.returnJsonArray(returnData)];
+		return [returnData];
 	}
 }
