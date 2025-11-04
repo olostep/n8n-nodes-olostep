@@ -119,7 +119,7 @@ export class OlostepScrape implements INodeType {
 						url: `https://api.olostep.com/v1/scrapes`,
 						json: true,
 					};
-					responseData = await this.helpers.requestWithAuthentication.call(this, 'olostepScrapeApi', options);
+					responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'olostepScrapeApi', options);
 					const result = responseData as IDataObject;
 					const scrapeResult = result.result as IDataObject | undefined;
 					const markdownContent = scrapeResult?.markdown_content as string | undefined;
@@ -146,7 +146,7 @@ export class OlostepScrape implements INodeType {
 						url: `https://api.olostep.com/v1/scrapes`,
 						json: true,
 					};
-					responseData = await this.helpers.requestWithAuthentication.call(this, 'olostepScrapeApi', options);
+					responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'olostepScrapeApi', options);
 					const result = responseData.result as IDataObject | undefined;
 					const jsonContent = result?.json_content;
 

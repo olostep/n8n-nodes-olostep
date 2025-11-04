@@ -1,8 +1,8 @@
 # n8n-nodes-olostep-scrape
 
-This is an n8n community node. It lets you use the Olostep Scrape API in your n8n workflows.
+This is an n8n community node. It lets you use the Olostep APIs in your n8n workflows to search, extract, and structure web data.
 
-Olostep is the programmatic layer to access and interact with the web, allowing you to get clean data from any website.
+Olostep is the best web scraping, crawling, and search API for AI. Extract structured web data from any website in real time and automate research workflows.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
