@@ -71,10 +71,10 @@ export class OlostepScrape implements INodeType {
 						action: 'Scrape a URL',
 					},
 					{
-						name: 'Search Google',
+						name: 'Search',
 						value: 'search',
 						description: 'Perform a Google search and get structured results',
-						action: 'Search Google',
+						action: 'Search',
 					},
 				],
 				default: 'create',
@@ -93,7 +93,7 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Batch Scrape URLs',
 						value: 'create',
-						description: 'Scrape up to 100,000 URLs in parallel',
+						description: 'Scrape up to 10k urls at the same time',
 						action: 'Batch scrape URLs',
 					},
 				],
@@ -113,7 +113,7 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Create Crawl',
 						value: 'create',
-						description: 'Create a web crawling job to discover and scrape linked pages',
+						description: 'Get the content of subpages of a URL',
 						action: 'Create a crawl',
 					},
 				],
@@ -133,7 +133,7 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Create Map',
 						value: 'create',
-						description: 'Extract all URLs from a website for content discovery',
+						description: 'Get all URLs on a website',
 						action: 'Create a map',
 					},
 				],
@@ -231,7 +231,7 @@ export class OlostepScrape implements INodeType {
 				placeholder: '@olostep/amazon-product',
 				description: 'Optional parser ID for specialized content extraction (e.g., @olostep/amazon-product)',
 			},
-			// Search Google fields
+			// Search fields
 			{
 				displayName: 'Query',
 				name: 'query',
