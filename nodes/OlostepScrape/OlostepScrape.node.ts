@@ -6,6 +6,7 @@ import {
 	INodeTypeDescription,
 	NodeConnectionType,
 	IHttpRequestOptions,
+	NodeOperationError,
 } from 'n8n-workflow';
 
 export class OlostepScrape implements INodeType {
@@ -93,8 +94,8 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Batch Scrape URLs',
 						value: 'create',
-						description: 'Scrape up to 10k urls at the same time',
-						action: 'Batch scrape URLs',
+						description: 'Scrape up to 10k URLs at the same time',
+						action: 'Batch scrape ur ls',
 					},
 				],
 				default: 'create',
@@ -153,7 +154,7 @@ export class OlostepScrape implements INodeType {
 				},
 				default: '',
 				placeholder: 'https://example.com',
-				description: 'The URL of the website you want to scrape. Must include http:// or https://',
+				description: 'The URL of the website you want to scrape. Must include http:// or https://.',
 			},
 			{
 				displayName: 'Output Format',
@@ -201,7 +202,7 @@ export class OlostepScrape implements INodeType {
 				description: 'Optional country code (e.g., US, GB, CA) for location-specific scraping',
 			},
 			{
-				displayName: 'Wait Before Scraping (milliseconds)',
+				displayName: 'Wait Before Scraping (Milliseconds)',
 				name: 'wait_before_scraping',
 				type: 'number',
 				typeOptions: {
@@ -261,7 +262,7 @@ export class OlostepScrape implements INodeType {
 				},
 				default: '',
 				placeholder: '[{"url":"https://example.com","custom_id":"site1"}]',
-				description: 'JSON array of objects with url and custom_id fields',
+				description: 'JSON array of objects with URL and custom_id fields',
 			},
 			{
 				displayName: 'Output Format',
@@ -309,7 +310,7 @@ export class OlostepScrape implements INodeType {
 				description: 'Optional country code (e.g., US, GB, CA) for location-specific scraping',
 			},
 			{
-				displayName: 'Wait Before Scraping (milliseconds)',
+				displayName: 'Wait Before Scraping (Milliseconds)',
 				name: 'wait_before_scraping',
 				type: 'number',
 				typeOptions: {
@@ -353,7 +354,7 @@ export class OlostepScrape implements INodeType {
 				},
 				default: '',
 				placeholder: 'https://example.com',
-				description: 'The starting URL for the crawl. Must include http:// or https://',
+				description: 'The starting URL for the crawl. Must include http:// or https://.',
 			},
 			{
 				displayName: 'Maximum Pages',
@@ -457,7 +458,7 @@ export class OlostepScrape implements INodeType {
 				},
 				default: '',
 				placeholder: 'https://example.com',
-				description: 'The website URL to extract links from. Must include http:// or https://',
+				description: 'The website URL to extract links from. Must include http:// or https://.',
 			},
 			{
 				displayName: 'Search Query',
@@ -647,18 +648,18 @@ export class OlostepScrape implements INodeType {
 						try {
 							parsedBatchArray = JSON.parse(batch_array);
 						} catch (error) {
-							throw new Error('Invalid JSON format for batch array. Expected: [{"url":"https://example.com","custom_id":"test1"}]');
+							throw new NodeOperationError(this.getNode(), 'Invalid JSON format for batch array. Expected: [{"url":"https://example.com","custom_id":"test1"}]');
 						}
 					} else {
 						parsedBatchArray = batch_array;
 					}
 
 					if (!Array.isArray(parsedBatchArray) || parsedBatchArray.length === 0) {
-						throw new Error('Batch array is required and must contain at least one URL');
+						throw new NodeOperationError(this.getNode(), 'Batch array is required and must contain at least one URL');
 					}
 
 					if (parsedBatchArray.length > 100000) {
-						throw new Error('Batch array cannot exceed 100,000 URLs');
+						throw new NodeOperationError(this.getNode(), 'Batch array cannot exceed 100,000 URLs');
 					}
 
 					const data: IDataObject = {
