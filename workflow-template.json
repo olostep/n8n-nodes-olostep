@@ -1,0 +1,59 @@
+{
+	"name": "Olostep Web Scraping Workflow",
+	"nodes": [
+		{
+			"parameters": {},
+			"id": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+			"name": "Start",
+			"type": "n8n-nodes-base.start",
+			"typeVersion": 1,
+			"position": [250, 300]
+		},
+		{
+			"parameters": {
+				"resource": "scrape",
+				"operation": "create",
+				"url_to_scrape": "https://example.com",
+				"formats": "markdown",
+				"country": "",
+				"wait_before_scraping": 0,
+				"parser": ""
+			},
+			"id": "b2c3d4e5-6789-01bc-def0-2345678901bc",
+			"name": "Olostep Scrape Website",
+			"type": "n8n-nodes-olostep.olostepScrape",
+			"typeVersion": 1,
+			"position": [450, 300],
+			"credentials": {
+				"olostepScrapeApi": {
+					"id": "1",
+					"name": "Olostep API"
+				}
+			}
+		}
+	],
+	"connections": {
+		"Start": {
+			"main": [
+				[
+					{
+						"node": "Olostep Scrape Website",
+						"type": "main",
+						"index": 0
+					}
+				]
+			]
+		}
+	},
+	"pinData": {},
+	"settings": {
+		"executionOrder": "v1"
+	},
+	"staticData": null,
+	"tags": [],
+	"triggerCount": 0,
+	"updatedAt": "2024-01-15T10:00:00.000Z",
+	"versionId": "1"
+}
+
+
