@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-olostep",
-  "version": "0.2.3",
-  "description": "n8n node for Olostep Web Scraping API - Scrape websites, batch process URLs, crawl sites, and map site structures",
+  "version": "0.2.4",
+  "description": "n8n node for Olostep Web Search, Scraping and Crawling API - Search, extract and structure web data from any website",
   "keywords": [
     "n8n-community-node-package"
   ],

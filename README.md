@@ -1,8 +1,8 @@
 # n8n-nodes-olostep
 
-The Olostep n8n integration brings powerful web scraping capabilities to n8n workflows. Build automated workflows that extract, monitor, and process web data from any website without writing code.
+The Olostep n8n integration brings powerful web search, scraping, and crawling capabilities to n8n workflows. Build automated workflows that search, extract, and structure web data from any website without writing code.
 
-Olostep is a web scraping, crawling, and search API that extracts structured web data from any website in real time. Perfect for automating research workflows, monitoring competitors, and collecting data at scale.
+Olostep is a web search, scraping, and crawling API that extracts structured web data from any website in real time. Perfect for automating research workflows, monitoring competitors, and collecting data at scale.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
