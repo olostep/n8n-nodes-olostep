@@ -1,8 +1,8 @@
 # n8n-nodes-olostep
 
-This is an n8n community node. It lets you use the Olostep APIs in your n8n workflows to search, extract, and structure web data.
+The Olostep n8n integration brings powerful web scraping capabilities to n8n workflows. Build automated workflows that extract, monitor, and process web data from any website without writing code.
 
-Olostep is the best web scraping, crawling, and search API for AI. Extract structured web data from any website in real time and automate research workflows.
+Olostep is a web scraping, crawling, and search API that extracts structured web data from any website in real time. Perfect for automating research workflows, monitoring competitors, and collecting data at scale.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
@@ -31,7 +31,13 @@ Then restart n8n to load the new node.
 
 ### Scrape Website
 
-Extract content from a single URL in multiple formats (HTML, Markdown, JSON, or Plain Text).
+Extract content from a single URL. Supports multiple formats and JavaScript rendering.
+
+**Use Cases:**
+- Monitor specific pages for changes
+- Extract product information from e-commerce sites
+- Gather data from news articles or blog posts
+- Pull content for content aggregation
 
 **Parameters:**
 - **URL to Scrape** (required): The URL of the website you want to scrape
@@ -52,9 +58,15 @@ Extract content from a single URL in multiple formats (HTML, Markdown, JSON, or 
 - `screenshot_hosted_url`: URL to screenshot (if available)
 - `page_metadata`: Page metadata
 
-### Search Google
+### Search
 
-Perform a Google search for a given query and returns structured results.
+Perform a Google search for a given query and get structured results.
+
+**Use Cases:**
+- Automated research workflows
+- Lead discovery and enrichment
+- Competitive analysis
+- Content research
 
 **Parameters:**
 - **Query** (required): Search query for Google
@@ -63,7 +75,13 @@ Perform a Google search for a given query and returns structured results.
 
 ### Batch Scrape URLs
 
-Process up to 100,000 URLs in parallel. Perfect for large-scale data extraction.
+Scrape up to 10k urls at the same time. Perfect for large-scale data extraction.
+
+**Use Cases:**
+- Scrape entire product catalogs
+- Extract data from multiple search results
+- Process lists of URLs from spreadsheets
+- Bulk content extraction
 
 **Parameters:**
 - **URLs to Scrape** (required): JSON array of objects with `url` and `custom_id` fields
@@ -85,7 +103,13 @@ Process up to 100,000 URLs in parallel. Perfect for large-scale data extraction.
 
 ### Create Crawl
 
-Autonomously discover and scrape entire websites by following links. Perfect for documentation sites, blogs, and content repositories.
+Get the content of subpages of a URL. Autonomously discover and scrape entire websites by following links. Perfect for documentation sites, blogs, and content repositories.
+
+**Use Cases:**
+- Crawl and archive entire documentation sites
+- Extract all blog posts from a website
+- Build knowledge bases from web content
+- Monitor website structure changes
 
 **Parameters:**
 - **Start URL** (required): Starting URL for the crawl
@@ -109,7 +133,13 @@ Autonomously discover and scrape entire websites by following links. Perfect for
 
 ### Create Map
 
-Extract all URLs from a website for content discovery and site structure analysis.
+Get all URLs on a website. Extract all URLs from a website for content discovery and site structure analysis.
+
+**Use Cases:**
+- Build sitemaps and site structure diagrams
+- Discover all pages before batch scraping
+- Find broken or missing pages
+- SEO audits and analysis
 
 **Parameters:**
 - **Website URL** (required): Website URL to extract links from
@@ -132,8 +162,9 @@ Extract all URLs from a website for content discovery and site structure analysi
 To use this node, you need to authenticate with the Olostep Scrape API.
 
 1. Sign up for an account on [olostep.com](https://www.olostep.com) to get an API key.
-2. Add a new credential in n8n for the Olostep Scrape API.
-3. Enter your API key in the 'API Key' field.
+2. Get your API key from the [Olostep Dashboard](https://olostep.com/dashboard).
+3. Add a new credential in n8n for the Olostep Scrape API.
+4. Enter your API key in the 'API Key' field.
 
 ## Workflow Template
 
@@ -271,9 +302,28 @@ When making updates:
 
 This node is tested against n8n version 1.x and requires Node.js version 20.15 or higher.
 
+## Specialized Parsers
+
+Olostep provides pre-built parsers for popular websites. Use them with the `Parser` parameter:
+
+- **@olostep/amazon-product** - Extract product details, prices, reviews, images, variants
+- **@olostep/linkedin-profile** - Extract name, title, company, location, experience
+- **@olostep/linkedin-company** - Extract company info, employee count, industry, description
+- **@olostep/google-search** - Extract search results, titles, snippets, URLs
+- **@olostep/google-maps** - Extract business info, reviews, ratings, location
+- **@olostep/instagram-profile** - Extract profile info, followers, posts, bio
+
 ## Resources
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
 * [Olostep API Documentation](https://docs.olostep.com)
+* [Olostep Dashboard](https://olostep.com/dashboard) - Get your API key and manage usage
+* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
 * [n8n Node Development Guide](https://docs.n8n.io/integrations/creating-nodes/)
-* [npm Package Documentation](https://docs.npmjs.com/)
+
+## Support
+
+Need help with the n8n integration?
+
+* **Documentation:** [docs.olostep.com](https://docs.olostep.com)
+* **Support Email:** info@olostep.com
+* **Website:** [olostep.com](https://www.olostep.com)
