@@ -60,7 +60,7 @@ Extract content from a single URL. Supports multiple formats and JavaScript rend
 
 ### Search
 
-Perform a Google search for a given query and get structured results.
+Search the Web for a given query and get structured results (non-AI, parser-based search results).
 
 **Use Cases:**
 - Automated research workflows
@@ -69,9 +69,34 @@ Perform a Google search for a given query and get structured results.
 - Content research
 
 **Parameters:**
-- **Query** (required): Search query for Google
+- **Query** (required): Search query
 
 **Output:** Returns structured search results as JSON.
+
+### Answers (AI)
+
+Search the web and return AI-powered answers in the JSON structure you want, with sources and citations.
+
+**Use Cases:**
+- Enrich spreadsheets or records with web-sourced facts
+- Ground AI applications on real-world data and sources
+- Research tasks that require verified outputs with citations
+
+**Parameters:**
+- **Task** (required): Question or task to answer using web data
+- **JSON Schema (Optional)**: JSON schema/object or a short description of the desired output shape
+
+  Examples:
+  - Object schema: `{ "book_title": "", "author": "", "release_date": "" }`
+  - Description string: `"Return a list of the top 5 competitors with name and homepage URL"`
+
+**Output Fields:**
+- `answer_id`: Answer ID
+- `object`: Object type
+- `task`: Original task
+- `result`: Parsed JSON if `json` was provided; otherwise the answer object
+- `sources`: Array of source URLs used
+- `created`: Creation timestamp
 
 ### Batch Scrape URLs
 

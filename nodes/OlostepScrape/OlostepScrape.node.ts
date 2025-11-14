@@ -16,7 +16,7 @@ export class OlostepScrape implements INodeType {
 		icon: 'file:olostep.svg',
 		group: ['transform'],
 		version: 1,
-		description: 'Extract content from any website using Olostep\'s powerful web scraping API',
+		description: 'Search, extract, and structure web data using Olostep\'s Web search, scraping, and crawling API',
 		defaults: {
 			name: 'Olostep Scrape',
 		},
@@ -36,8 +36,8 @@ export class OlostepScrape implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Scrape',
-						value: 'scrape',
+						name: 'Answer',
+						value: 'answer',
 					},
 					{
 						name: 'Batch',
@@ -50,6 +50,10 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Map',
 						value: 'map',
+					},
+					{
+						name: 'Scrape',
+						value: 'scrape',
 					},
 				],
 				default: 'scrape',
@@ -74,7 +78,7 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Search',
 						value: 'search',
-						description: 'Perform a Google search and get structured results',
+						description: 'Search the Web and get structured results',
 						action: 'Search',
 					},
 				],
@@ -95,7 +99,7 @@ export class OlostepScrape implements INodeType {
 						name: 'Batch Scrape URLs',
 						value: 'create',
 						description: 'Scrape up to 10k URLs at the same time',
-						action: 'Batch scrape ur ls',
+						action: 'Batch scrape urls',
 					},
 				],
 				default: 'create',
@@ -136,6 +140,26 @@ export class OlostepScrape implements INodeType {
 						value: 'create',
 						description: 'Get all URLs on a website',
 						action: 'Create a map',
+					},
+				],
+				default: 'create',
+			},
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: ['answer'],
+					},
+				},
+				options: [
+					{
+						name: 'Create Answer',
+						value: 'create',
+						description: 'Search the web and return AI-powered answers with sources',
+						action: 'Create answer',
 					},
 				],
 				default: 'create',
@@ -246,7 +270,7 @@ export class OlostepScrape implements INodeType {
 				},
 				default: '',
 				placeholder: 'What is the capital of US?',
-				description: 'Search query for Google',
+				description: 'Search query',
 			},
 			// Batch Scrape fields
 			{
@@ -517,6 +541,36 @@ export class OlostepScrape implements INodeType {
 				default: '',
 				placeholder: '/admin/**',
 				description: 'Glob patterns to exclude specific paths (e.g., "/admin/**")',
+			},
+			// Answers fields
+			{
+				displayName: 'Task',
+				name: 'task',
+				type: 'string',
+				required: true,
+				displayOptions: {
+					show: {
+						resource: ['answer'],
+						operation: ['create'],
+					},
+				},
+				default: '',
+				placeholder: 'What is the latest book by J.K. Rowling?',
+				description: 'Question or task to search and answer using web data',
+			},
+			{
+				displayName: 'JSON Schema (Optional)',
+				name: 'json_schema',
+				type: 'string',
+				displayOptions: {
+					show: {
+						resource: ['answer'],
+						operation: ['create'],
+					},
+				},
+				default: '',
+				placeholder: '{"book_title":"","author":"","release_date":""}',
+				description: 'Optional JSON schema or description of the structure to return',
 			},
 		],
 	};
@@ -800,6 +854,64 @@ export class OlostepScrape implements INodeType {
 							urls: responseData.urls || [],
 							...(search_query && { search_query }),
 							...(top_n && { top_n: typeof top_n === 'string' ? parseInt(top_n) : top_n }),
+						},
+						pairedItem: { item: i },
+					});
+				}
+			} else if (resource === 'answer') {
+				if (operation === 'create') {
+					const task = this.getNodeParameter('task', i) as string;
+					const jsonSchemaRaw = this.getNodeParameter('json_schema', i, '') as string;
+
+					const data: IDataObject = { task };
+					if (jsonSchemaRaw) {
+						// Try to parse as JSON, otherwise pass as string description
+						try {
+							const parsed = JSON.parse(jsonSchemaRaw);
+							(data as any).json = parsed;
+						} catch (e) {
+							(data as any).json = jsonSchemaRaw;
+						}
+					}
+
+					const options: IHttpRequestOptions = {
+						headers: {
+							'Accept': 'application/json',
+						},
+						method: 'POST',
+						body: data,
+						url: 'https://api.olostep.com/v1/answers',
+						json: true,
+					};
+					responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'olostepScrapeApi', options);
+
+					const result = responseData as IDataObject;
+					const answerResult = result.result as IDataObject | undefined;
+
+					let parsedJson: IDataObject | IDataObject[] | string | null = null;
+					const jsonContent = answerResult?.json_content;
+					if (jsonContent) {
+						if (typeof jsonContent === 'string') {
+							try {
+								parsedJson = JSON.parse(jsonContent);
+							} catch (err) {
+								parsedJson = jsonContent;
+							}
+						} else {
+							parsedJson = jsonContent as any;
+						}
+					}
+
+					const sources = Array.isArray(answerResult?.sources) ? answerResult?.sources : [];
+
+					returnData.push({
+						json: {
+							answer_id: result.id || `answer_${Date.now()}`,
+							object: result.object || 'answer',
+							task: result.task || task,
+							result: parsedJson ?? answerResult ?? null,
+							sources: sources,
+							created: result.created,
 						},
 						pairedItem: { item: i },
 					});
