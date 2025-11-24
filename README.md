@@ -329,14 +329,14 @@ This node is tested against n8n version 1.x and requires Node.js version 20.15 o
 
 ## Specialized Parsers
 
-Olostep provides pre-built parsers for popular websites. Use them with the `Parser` parameter:
+Olostep provides pre-built parsers for popular websites and tasks. Use them with the `Parser` parameter:
 
 - **@olostep/amazon-product** - Extract product details, prices, reviews, images, variants
-- **@olostep/linkedin-profile** - Extract name, title, company, location, experience
-- **@olostep/linkedin-company** - Extract company info, employee count, industry, description
 - **@olostep/google-search** - Extract search results, titles, snippets, URLs
 - **@olostep/google-maps** - Extract business info, reviews, ratings, location
-- **@olostep/instagram-profile** - Extract profile info, followers, posts, bio
+- **@olostep/extract-emails** - Extract emails from pages and contact sections
+- **@olostep/extract-socials** - Extract social profile links (X/Twitter, GitHub, etc.)
+- **@olostep/extract-calendars** - Extract calendar links (Google Calendar, ICS)
 
 ## Resources
 
