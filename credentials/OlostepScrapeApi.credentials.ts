@@ -8,7 +8,7 @@ import {
 export class OlostepScrapeApi implements ICredentialType {
 	name = 'olostepScrapeApi';
 	displayName = 'Olostep Scrape API';
-	documentationUrl = 'https://www.olostep.com';
+	documentationUrl = 'https://docs.olostep.com/integrations/n8n';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'API Key',
