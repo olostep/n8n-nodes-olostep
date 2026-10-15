@@ -4,7 +4,7 @@ import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
-	NodeConnectionType,
+	NodeConnectionTypes,
 	IHttpRequestOptions,
 	NodeOperationError,
 } from 'n8n-workflow';
@@ -16,12 +16,14 @@ export class OlostepScrape implements INodeType {
 		icon: 'file:olostep.svg',
 		group: ['transform'],
 		version: 1,
+		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Search, extract, and structure web data using Olostep\'s Web search, scraping, and crawling API',
 		defaults: {
 			name: 'Olostep Scrape',
 		},
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		usableAsTool: true,
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		credentials: [
 			{
 				name: 'olostepScrapeApi',
@@ -673,7 +675,7 @@ export class OlostepScrape implements INodeType {
 						if (typeof jsonContent === 'string') {
 							try {
 								parsedData = JSON.parse(jsonContent);
-							} catch (error) {
+							} catch {
 								// If it's not a valid JSON string, treat it as plain text.
 								parsedData = { value: jsonContent };
 							}
@@ -701,7 +703,7 @@ export class OlostepScrape implements INodeType {
 					if (typeof batch_array === 'string') {
 						try {
 							parsedBatchArray = JSON.parse(batch_array);
-						} catch (error) {
+						} catch {
 							throw new NodeOperationError(this.getNode(), 'Invalid JSON format for batch array. Expected: [{"url":"https://example.com","custom_id":"test1"}]');
 						}
 					} else {
@@ -868,9 +870,9 @@ export class OlostepScrape implements INodeType {
 						// Try to parse as JSON, otherwise pass as string description
 						try {
 							const parsed = JSON.parse(jsonSchemaRaw);
-							(data as any).json = parsed;
-						} catch (e) {
-							(data as any).json = jsonSchemaRaw;
+							data.json = parsed;
+						} catch {
+							data.json = jsonSchemaRaw;
 						}
 					}
 
@@ -894,11 +896,11 @@ export class OlostepScrape implements INodeType {
 						if (typeof jsonContent === 'string') {
 							try {
 								parsedJson = JSON.parse(jsonContent);
-							} catch (err) {
+							} catch {
 								parsedJson = jsonContent;
 							}
 						} else {
-							parsedJson = jsonContent as any;
+							parsedJson = jsonContent as IDataObject | IDataObject[];
 						}
 					}
 

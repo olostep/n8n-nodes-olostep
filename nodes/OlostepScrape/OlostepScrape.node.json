@@ -1,10 +1,11 @@
 {
-	"node": "n8n-nodes-base.OlostepScrape",
+	"node": "n8n-nodes-olostep.OlostepScrape",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
-	"categories": ["Development", "Developer Tools", "AI"],
-	"subTitle": "Most reliable and cost-effective Web search, AI scraping and crawling API — search, extract and structure web data from any website",
-	"subtitle": "Most reliable and cost-effective Web search, AI scraping and crawling API — search, extract and structure web data from any website",
+	"categories": [
+		"Development",
+		"Data & Storage"
+	],
 	"resources": {
 		"credentialDocumentation": [
 			{

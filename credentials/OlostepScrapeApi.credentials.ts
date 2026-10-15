@@ -2,12 +2,14 @@ import {
 	IAuthenticateGeneric,
 	ICredentialTestRequest,
 	ICredentialType,
+	Icon,
 	INodeProperties,
 } from 'n8n-workflow';
 
 export class OlostepScrapeApi implements ICredentialType {
 	name = 'olostepScrapeApi';
 	displayName = 'Olostep Scrape API';
+	icon: Icon = 'file:olostep.svg';
 	documentationUrl = 'https://docs.olostep.com/integrations/n8n';
 	properties: INodeProperties[] = [
 		{
