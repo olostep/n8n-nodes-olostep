@@ -1,53 +1,53 @@
 {
-  "name": "n8n-nodes-olostep",
-  "version": "0.2.8",
-  "description": "n8n node for Olostep Web Search, Scraping and Crawling API - Search, extract and structure web data from any website",
-  "keywords": [
-    "n8n-community-node-package"
-  ],
-  "license": "MIT",
-  "homepage": "https://www.olostep.com",
-  "author": {
-    "name": "Olostep Technologies",
-    "email": "info@olostep.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/olostep/n8n-nodes-olostep.git"
-  },
-  "engines": {
-    "node": ">=20.15"
-  },
-  "main": "index.js",
-  "scripts": {
-    "build": "npx rimraf dist && tsc && gulp build:icons",
-    "dev": "tsc --watch",
-    "format": "prettier nodes credentials --write",
-    "lint": "eslint nodes credentials package.json",
-    "lintfix": "eslint nodes credentials package.json --fix",
-    "prepublishOnly": "npm run build && npm run lint -c .eslintrc.prepublish.js nodes credentials package.json"
-  },
-  "files": [
-    "dist"
-  ],
-  "n8n": {
-    "n8nNodesApiVersion": 1,
-    "credentials": [
-      "dist/credentials/OlostepScrapeApi.credentials.js"
-    ],
-    "nodes": [
-      "dist/nodes/OlostepScrape/OlostepScrape.node.js"
-    ]
-  },
-  "devDependencies": {
-    "@typescript-eslint/parser": "~8.32.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-n8n-nodes-base": "^1.16.3",
-    "gulp": "^5.0.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
-  },
-  "peerDependencies": {
-    "n8n-workflow": "*"
-  }
+	"name": "n8n-nodes-olostep",
+	"version": "0.2.9",
+	"description": "n8n node for Olostep Web Search, Scraping and Crawling API - Search, extract and structure web data from any website",
+	"keywords": [
+		"n8n-community-node-package"
+	],
+	"license": "MIT",
+	"homepage": "https://www.olostep.com",
+	"author": {
+		"name": "Olostep Technologies",
+		"email": "info@olostep.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/olostep/n8n-nodes-olostep.git"
+	},
+	"engines": {
+		"node": ">=20.15"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/OlostepScrapeApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/OlostepScrape/OlostepScrape.node.js"
+		],
+		"strict": true
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"eslint": "9.39.4",
+		"prettier": "3.8.3",
+		"release-it": "20.2.0",
+		"typescript": "5.9.3"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
 }
