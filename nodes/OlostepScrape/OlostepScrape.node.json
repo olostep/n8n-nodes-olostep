@@ -4,7 +4,10 @@
 	"codexVersion": "1.0",
 	"categories": [
 		"Development",
-		"Data & Storage"
+		"Data & Storage",
+		"Marketing & Content",
+		"Sales",
+		"Utility"
 	],
 	"resources": {
 		"credentialDocumentation": [
