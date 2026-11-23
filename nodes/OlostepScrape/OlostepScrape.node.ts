@@ -100,7 +100,7 @@ export class OlostepScrape implements INodeType {
 					{
 						name: 'Batch Scrape URLs',
 						value: 'create',
-						description: 'Scrape up to 10k URLs at the same time',
+						description: 'Scrape up to 100k URLs in one batch',
 						action: 'Batch scrape urls',
 					},
 				],

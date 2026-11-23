@@ -100,7 +100,7 @@ Search the web and return AI-powered answers in the JSON structure you want, wit
 
 ### Batch Scrape URLs
 
-Scrape up to 10k urls at the same time. Perfect for large-scale data extraction.
+Scrape up to 100k URLs in one batch. Perfect for large-scale data extraction.
 
 **Use Cases:**
 - Scrape entire product catalogs
